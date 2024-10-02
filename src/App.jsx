@@ -9,7 +9,70 @@ const { Title } = Typography;
 const { Content } = Layout;
 
 // Sample list of words
-const words = ["Fikiri", "Blip", "Zap", "Quix", "Jumble", "Waddle", "Gizmo", "Blink", "Fuzzy", "Jolt", "Buzz", "Swoop", "Zigzag", "Flip", "Wink"];
+const words = [
+  // English Names
+  "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel",
+  "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa",
+  "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey",
+  "Xray", "Yankee", "Zulu", "Blaze", "Storm", "Bolt", "Spark", "Falcon",
+  "Horizon", "Zephyr", "Breeze", "Shadow", "Maverick", "Nimbus", "Vortex",
+  "Flare", "Quartz", "Cosmos", "Orbit", "Glint", "Talon", "Frost", "Lunar",
+  "Sonic", "Quasar", "Spectra", "Phoenix", "Raven", "Glacier", "Onyx", "Cobalt",
+  "Nebula", "Solstice", "Inferno", "Stellar", "Titan", "Ember", "Tempest",
+  "Galaxy", "Sable", "Archer", "Blizzard", "Aurora", "Sphinx", "Griffin",
+  "Jaguar", "Pinnacle", "Summit", "Cascade", "Velocity", "Rogue", "Seraph",
+  "Nova", "Hyperion", "Magnet", "Ivory", "Comet", "Blip", "Osprey", "Drift",
+  "Forge", "Thorn", "Hawk", "Scorch", "Sage", "Flint", "Quill", "Crest",
+  "Dawn", "Venom", "Wisp", "Aether", "Specter", "Rune", "Vega", "Bison",
+  "Drake", "Cypher", "Apex", "Beacon", "Fusion", "Everest", "Striker",
+  "Scorpion", "Radiant", "Saber", "Volt", "Tornado", "Thunder", "Fury",
+  "Zenith", "Titanium", "Optimus", "Voyager", "Aspen", "Mistral", "Orion",
+  "Chimera", "Hurricane", "Oracle", "Aegis", "Paladin", "Mirage", "Voyage",
+  "Omega", "Artemis", "Drifter", "Ion", "Noble", "Vanguard", "Goliath",
+  "Sentinel", "Blitz", "Atlas", "Sapphire", "Orchid", "Pyro", "Cyclone",
+  "Thunderbolt", "Blade", "Cinder", "Boulder", "Stingray", "Typhoon",
+  "Axel", "Laser", "Fission", "Thrasher", "Pulse", "Juno", "Exodus",
+  "Nomad", "Tundra", "Starfire", "Ignite", "Solaris", "Banshee", "Hypernova",
+  "Renegade", "Marauder", "Colossus", "Dusk", "Nightfall", "Quantum",
+  "Whirlwind", "Axon", "Equinox", "Catalyst", "Helix", "Eclipse", "Serenade",
+  "Valiant", "Zeus", "Viper", "Flame", "Firestorm", "Odyssey", "Valkyrie",
+  "Ignis", "Eagle", "Triton", "Hydra", "Peregrine", "Starlight", "Magnetar",
+  "Paragon", "Helios", "Ignition", "Genesis", "Radial", "Vertex", "Eon",
+  "Spire", "Lumen", "Crimson", "Frostbite", "Synergy", "Infinity", "Axiom",
+  "Flash", "Starfall", "Solace", "Guardian", "Zealot", "Spectral", "Strider",
+  "Turbine", "Galaxia",
+
+  // Hindi Names
+  "Aarav", "Vivaan", "Aditya", "Krishna", "Aryan", "Kavya", "Dhruv", "Ishaan",
+  "Neeraj", "Vihan", "Ananya", "Saanvi", "Kiran", "Tara", "Lakshya", "Rishi",
+  "Nishant", "Parth", "Arjun", "Shiv", "Keshav", "Rohit", "Tanishq", "Tejas",
+  "Yash", "Vivek", "Chaitanya", "Aditi", "Sneha", "Amrita", "Riya", "Aisha",
+  "Raghav", "Shreya", "Varun", "Manish", "Gaurav", "Maya", "Anjali", "Ritika",
+  "Swara", "Pooja", "Rahul", "Siddharth", "Nisha", "Pranav", "Bhumi", "Dev",
+  "Aniket", "Arnav", "Anushka", "Harsh", "Akhil", "Kunal", "Suhana", "Ritu",
+  "Niharika", "Kanika", "Sanya", "Navya", "Meera", "Reyansh", "Vidya", "Raj",
+  "Samar", "Ayaan", "Sarthak", "Ira", "Samarth", "Gagan", "Devansh", "Vikas",
+  "Piyush", "Aman", "Yuvraj", "Rana", "Priya", "Shruti", "Simran", "Mohan",
+  "Vani", "Ruchi", "Sagar", "Kabir", "Harsha", "Sejal", "Veer", "Tanvi",
+  "Ravindra", "Madhav", "Vikram", "Bhavya", "Jai", "Alok", "Rakesh", "Kartik",
+  "Mitali", "Amar", "Sahil", "Nitin", "Vaibhav", "Sonia", "Rupesh", "Kriti",
+  "Harshit", "Sukriti", "Srishti", "Yamini", "Jayant", "Prerna", "Siddhi",
+  "Ajay", "Ananya", "Ramesh", "Mehul", "Shantanu", "Ekta", "Hemant", "Rajesh",
+  "Rohini", "Sumit", "Tanuja", "Sudeep", "Anmol", "Vishal", "Neha", "Shivani",
+
+  // Tamil Names
+  "Arun", "Aakaash", "Karthik", "Vishnu", "Sanjay", "Hari", "Gokul", "Shiva", "Ravi",
+  "Praveen", "Senthil", "Kavin", "Saravanan", "Ashok", "Dinesh", "Ganesh",
+  "Sathya", "Rajesh", "Kumar", "Mohan", "Tharun", "Suresh", "Balaji", "Mani",
+  "Vijay", "Raghavan", "Kamal", "Naveen", "Bharath", "Prakash", "Vignesh",
+  "Madhan", "Sriram", "Ramesh", "Anand", "Vimal", "Deepak", "Aravind", "Surya",
+  "Lakshmi", "Priya", "Divya", "Sangeetha", "Gayathri", "Anitha", "Kavitha", "Kavya",
+  "Janani", "Meena", "Nithya", "Sathya", "Rani", "Latha", "Vidya", "Rekha",
+  "Malar", "Sandhya", "Anu", "Bhuvana", "Sindhu", "Shalini", "Preethi", "MunnSamy",
+  "Devi", "Uma", "Kala", "Radha", "Swathi", "Savitha", "Aarthi", "Asha",
+  "Vani", "Sowmya", "Padma", "Rupa", "Suganya", "Geetha", "Renuka", "Roja"
+];
+
 
 // Function to generate a unique identifier
 const generateUniqueID = () => {
@@ -28,7 +91,9 @@ function App() {
   const [progress, setProgress] = useState(0);
   const [isOnline, setIsOnline] = useState(false);
   const [connectedID, setConnectedID] = useState('');
-  const [showChat, setShowChat] = useState(false); // State for showing chat sidebar
+  const [showChat, setShowChat] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [downloadProgress, setDownloadProgress] = useState(0);
 
   useEffect(() => {
     // Generate a unique ID using the custom function
