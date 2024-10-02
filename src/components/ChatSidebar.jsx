@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Input, Button, List, Typography } from 'antd';
 
-const ChatSidebar = ({ peer, conn }) => {
+const { Text } = Typography;
+
+const ChatSidebar = ({ conn }) => {
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
 
@@ -30,30 +33,43 @@ const ChatSidebar = ({ peer, conn }) => {
             backgroundColor: '#fff',
             boxShadow: '-2px 0 5px rgba(0, 0, 0, 0.5)',
             padding: '1rem',
-            transition: 'transform 0.3s ease',
-            transform: 'translateX(0)',
+            overflowY: 'auto',
         }}>
-            <h2 className="text-xl mb-4">Chat</h2>
-            <div className="flex flex-col h-72 overflow-auto border border-gray-300 mb-4">
-                {messages.map((msg, index) => (
-                    <div key={index} className={`p-2 ${msg.isSender ? 'text-right' : 'text-left'}`}>
-                        <span className={`inline-block px-3 py-2 rounded-lg ${msg.isSender ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}>
-                            {msg.text}
-                        </span>
-                    </div>
-                ))}
-            </div>
-            <div className="flex">
-                <input
-                    type="text"
+            <h2 style={{ marginBottom: '16px', textAlign: 'center' }}>Chat</h2>
+            <List
+                dataSource={messages}
+                renderItem={(msg, index) => (
+                    <List.Item
+                        key={index}
+                        style={{
+                            justifyContent: msg.isSender ? 'flex-end' : 'flex-start',
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: 'inline-block',
+                                maxWidth: '70%',
+                                padding: '8px',
+                                borderRadius: '16px',
+                                backgroundColor: msg.isSender ? '#1890ff' : '#f0f0f0',
+                                color: msg.isSender ? '#fff' : '#000',
+                            }}
+                        >
+                            <Text>{msg.text}</Text>
+                        </div>
+                    </List.Item>
+                )}
+            />
+            <div style={{ display: 'flex', marginTop: '16px' }}>
+                <Input
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    className="flex-grow p-2 border border-gray-300 rounded-md"
                     placeholder="Type a message..."
+                    style={{ flexGrow: 1, marginRight: '8px' }}
                 />
-                <button onClick={sendMessage} className="ml-2 bg-blue-500 text-white p-2 rounded-md">
+                <Button type="primary" onClick={sendMessage}>
                     Send
-                </button>
+                </Button>
             </div>
         </div>
     );

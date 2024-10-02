@@ -3,9 +3,20 @@ import Peer from 'peerjs';
 import { Typography, Layout, Modal, Button, notification, Upload, Progress, Badge } from 'antd';
 import IDDisplay from './components/IDDisplay';
 import FileTransfer from './components/FileTransfer';
+import ChatSidebar from './components/ChatSidebar';
 
 const { Title } = Typography;
 const { Content } = Layout;
+
+// Sample list of words
+const words = ["Fikiri", "Blip", "Zap", "Quix", "Jumble", "Waddle", "Gizmo", "Blink", "Fuzzy", "Jolt", "Buzz", "Swoop", "Zigzag", "Flip", "Wink"];
+
+// Function to generate a unique identifier
+const generateUniqueID = () => {
+  const randomWord = words[Math.floor(Math.random() * words.length)];
+  const suffix = Math.random().toString(36).substring(2, 8); // Generates 6 characters
+  return randomWord + suffix; // Combine word and suffix
+};
 
 function App() {
   const [peerID, setPeerID] = useState('');
@@ -17,9 +28,13 @@ function App() {
   const [progress, setProgress] = useState(0);
   const [isOnline, setIsOnline] = useState(false);
   const [connectedID, setConnectedID] = useState('');
+  const [showChat, setShowChat] = useState(false); // State for showing chat sidebar
 
   useEffect(() => {
-    const peer = new Peer();
+    // Generate a unique ID using the custom function
+    const uniqueID = generateUniqueID();
+
+    const peer = new Peer(uniqueID); // Use the generated unique ID
 
     peer.on('open', (id) => {
       setPeerID(id);
@@ -44,6 +59,8 @@ function App() {
 
     setPeerInstance(peer);
   }, []);
+
+  // The rest of your component code goes here...
 
   const handleConnect = (recipientID) => {
     console.log(`Attempting to connect to recipient ID: ${recipientID}`);
@@ -70,6 +87,7 @@ function App() {
 
     connection.on('close', () => {
       setIsOnline(false);
+      setShowChat(false); // Hide chat when connection is closed
       notification.warning({ message: "Connection closed", description: "You have been disconnected." });
     });
   };
@@ -79,6 +97,7 @@ function App() {
     setConn(incomingConnection);
     setConnectedID(incomingConnection.peer);
     setIsOnline(true);
+    setShowChat(true); // Show chat when connection is accepted
 
     incomingConnection.on('open', () => {
       console.log('Handshake completed, connection established');
@@ -87,6 +106,7 @@ function App() {
 
     incomingConnection.on('close', () => {
       setIsOnline(false);
+      setShowChat(false); // Hide chat when connection is closed
       notification.warning({ message: "Connection closed", description: "You have been disconnected." });
     });
 
@@ -208,6 +228,20 @@ function App() {
         )}
 
         <FileTransfer onConnect={handleConnect} />
+
+        {/* Show Chat Button */}
+        {isOnline && (
+          <Button
+            type="primary"
+            style={{ marginTop: '1rem' }}
+            onClick={() => setShowChat((prev) => !prev)}
+          >
+            {showChat ? 'Hide Chat' : 'Show Chat'}
+          </Button>
+        )}
+
+        {/* Chat Sidebar */}
+        {showChat && <ChatSidebar peer={peerInstance} conn={conn} />}
 
         {/* Modal for Incoming Connection */}
         <Modal
