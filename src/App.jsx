@@ -4,6 +4,7 @@ import { Typography, Layout, Modal, Button, notification, Upload, Progress, Badg
 import IDDisplay from './components/IDDisplay';
 import FileTransfer from './components/FileTransfer';
 import ChatSidebar from './components/ChatSidebar';
+import './index.css';
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -270,17 +271,59 @@ function App() {
   };
 
   return (
-    <Layout style={{ minHeight: '100vh', backgroundColor: '#fae6ca', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Content style={{ backgroundColor: '#fbc490', padding: '2rem', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-        <Title level={2} style={{ textAlign: 'center' }}>Sprintora</Title>
+    <Layout
+      style={{
+        minHeight: '97vh',
+        backgroundColor: '#fae6ca',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        borderRadius: '20px',
+        padding: '20px'
+      }}
+    >
+      {/* Sprintora Title Outside the Box */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '10px',
+          left: '10px',
+        }}
+      >
+        <Title
+          level={2}
+          style={{
+            fontFamily: 'RocGrotesk',
+            margin: '10px',
+          }}
+        >
+          Sprintora
+        </Title>
+      </div>
 
-        <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
+      <Content
+        style={{
+          backgroundColor: 'var(--color-200)', // light background
+          padding: '2rem',
+          margin: '10px',
+          marginTop: '40px',
+          borderRadius: '15px',
+          maxHeight: '35rem',
+          boxShadow: 'rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset',
+          position: 'relative',
+          color: 'var(--text-color-primary)', // primary text color
+        }}
+      >
+        {/* Online Status Badge */}
+        <div style={{ position: 'absolute', top: '20px', left: '20px' }}>
           <Badge
             status={isOnline ? 'success' : 'default'}
             text={isOnline ? `Online: ${connectedID}` : 'Offline'}
           />
         </div>
 
+        {/* Display Peer ID */}
         <IDDisplay peerID={peerID} />
 
         {/* File Transfer Section */}
@@ -288,10 +331,10 @@ function App() {
           <Button type="primary">Select File</Button>
         </Upload>
 
-        {uploading && (
-          <Progress percent={progress} status="active" />
-        )}
+        {/* Uploading Progress */}
+        {uploading && <Progress percent={progress} status="active" />}
 
+        {/* Connection Handler */}
         <FileTransfer onConnect={handleConnect} />
 
         {/* Show Chat Button */}
@@ -325,7 +368,7 @@ function App() {
           <p>Someone is trying to connect to you!</p>
         </Modal>
       </Content>
-    </Layout>
+    </Layout >
   );
 }
 
