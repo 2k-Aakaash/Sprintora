@@ -270,6 +270,10 @@ function App() {
     return false; // Prevent default upload behavior
   };
 
+  const toggleChat = () => {
+    setShowChat((prev) => !prev);
+  };
+
   return (
     <Layout
       style={{
@@ -349,7 +353,7 @@ function App() {
         )}
 
         {/* Chat Sidebar */}
-        {showChat && <ChatSidebar peer={peerInstance} conn={conn} />}
+        {showChat && <ChatSidebar peer={peerInstance} conn={conn} showChat={showChat} />}
 
         {/* Modal for Incoming Connection */}
         <Modal

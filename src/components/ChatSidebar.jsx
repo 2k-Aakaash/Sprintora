@@ -3,7 +3,7 @@ import { Input, Button, List, Typography } from 'antd';
 import '../index.css';
 const { Text } = Typography;
 
-const ChatSidebar = ({ conn }) => {
+const ChatSidebar = ({ conn, showChat }) => {
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
 
@@ -24,7 +24,7 @@ const ChatSidebar = ({ conn }) => {
     };
 
     return (
-        <div style={{
+        <div className={`chat-sidebar ${showChat ? 'slide-in' : 'slide-out'}`} style={{
             position: 'fixed',
             top: 0,
             right: 0,
@@ -35,6 +35,8 @@ const ChatSidebar = ({ conn }) => {
             padding: '1rem',
             display: 'flex',
             flexDirection: 'column',
+            transition: 'transform 0.3s ease-in-out',
+            transform: showChat ? 'translateX(0)' : 'translateX(100%)',
         }}>
             <h2 style={{ marginBottom: '16px', textAlign: 'center' }}>Chat</h2>
             <List
