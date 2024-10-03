@@ -67,6 +67,12 @@
     /* Example border colors */
     --border-light: var(--color-200);
     --border-dark: var(--color-700);
+
+    --sender-chat-color: var(--color-400); /* Your custom sender chat color */
+    --receiver-chat-color: var(--color-100); /* Background color for receiver chat */
+    --text-color-sender: var(--color-950); /* Text color for sender */
+    --text-color-receiver: var(--color-950); /* Text color for receiver */
+  
   }
   
 

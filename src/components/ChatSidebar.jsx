@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Button, List, Typography } from 'antd';
-
+import '../index.css';
 const { Text } = Typography;
 
 const ChatSidebar = ({ conn }) => {
@@ -33,7 +33,8 @@ const ChatSidebar = ({ conn }) => {
             backgroundColor: '#fff',
             boxShadow: '-2px 0 5px rgba(0, 0, 0, 0.5)',
             padding: '1rem',
-            overflowY: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
         }}>
             <h2 style={{ marginBottom: '16px', textAlign: 'center' }}>Chat</h2>
             <List
@@ -51,14 +52,15 @@ const ChatSidebar = ({ conn }) => {
                                 maxWidth: '70%',
                                 padding: '8px',
                                 borderRadius: '16px',
-                                backgroundColor: msg.isSender ? '#1890ff' : '#f0f0f0',
-                                color: msg.isSender ? '#fff' : '#000',
+                                backgroundColor: msg.isSender ? 'var(--sender-chat-color)' : 'var(--receiver-chat-color)', // Use CSS variables
+                                color: msg.isSender ? 'var(--text-color-sender)' : 'var(--text-color-receiver)',
                             }}
                         >
                             <Text>{msg.text}</Text>
                         </div>
                     </List.Item>
                 )}
+                style={{ flex: 1, overflowY: 'auto' }} // Allow the list to take available space
             />
             <div style={{ display: 'flex', marginTop: '16px' }}>
                 <Input
